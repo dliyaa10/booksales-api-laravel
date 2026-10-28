@@ -3,13 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use Illuminate\Http\JsonResponse;
 
 class BookController extends Controller
 {
-    public function index()
+    public function index(): JsonResponse
     {
         $books = Book::all();
 
-        return view('books', compact('books'));
+        return response()->json([
+            'success' => true,
+            'message' => 'Data buku berhasil diambil',
+            'data' => $books
+        ], 200);
     }
 }
