@@ -1,12 +1,14 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - BookSales</title>
+
     <style>
-        * { box-sizing: border-box; }
+        * {
+            box-sizing: border-box;
+        }
 
         body {
             margin: 0;
@@ -24,10 +26,25 @@
             padding: 28px 20px;
         }
 
-        .brand { font-size: 22px; font-weight: bold; }
-        .brand span { color: #a99aff; }
-        .sidebar p { color: #a9abc4; font-size: 13px; margin-top: 8px; }
-        .menu { margin-top: 42px; }
+        .brand {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .brand span {
+            color: #a99aff;
+        }
+
+        .sidebar p {
+            color: #a9abc4;
+            font-size: 13px;
+            margin-top: 8px;
+        }
+
+        .menu {
+            margin-top: 42px;
+        }
+
         .menu a {
             display: block;
             padding: 14px;
@@ -35,34 +52,40 @@
             color: #dedff0;
             text-decoration: none;
             border-radius: 9px;
+            transition: background 0.2s ease, color 0.2s ease;
         }
-       
-.menu a {
-    display: block;
-    padding: 14px;
-    margin-bottom: 10px;
-    color: #dedff0;
-    text-decoration: none;
-    border-radius: 9px;
-    transition: background 0.2s ease, color 0.2s ease;
-}
 
-/* Ungu hanya untuk menu yang aktif */
-.menu a.active {
-    background: #7160dc;
-    color: #ffffff;
-}
+        .menu a.active {
+            background: #7160dc;
+            color: #ffffff;
+        }
 
-/* Hover tidak menggunakan warna ungu */
-.menu a:hover:not(.active) {
-    background: #393956;
-    color: #ffffff;
-}
+        .menu a:hover:not(.active) {
+            background: #393956;
+            color: #ffffff;
+        }
 
-        main { margin-left: 225px; padding: 34px; }
-        .top { display: flex; justify-content: space-between; align-items: center; }
-        h1 { margin: 0; font-size: 28px; }
-        .muted { color: #85869e; font-size: 14px; }
+        main {
+            margin-left: 225px;
+            padding: 34px;
+        }
+
+        .top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        .muted {
+            color: #85869e;
+            font-size: 14px;
+        }
+
         .profile {
             background: white;
             padding: 12px 16px;
@@ -84,8 +107,16 @@
             box-shadow: 0 5px 22px #24204a08;
         }
 
-        .number { font-size: 30px; font-weight: bold; margin-top: 12px; }
-        .icon { color: #7160dc; font-size: 22px; }
+        .number {
+            font-size: 30px;
+            font-weight: bold;
+            margin-top: 12px;
+        }
+
+        .icon {
+            color: #7160dc;
+            font-size: 22px;
+        }
 
         .section-title {
             display: flex;
@@ -95,7 +126,11 @@
             margin-bottom: 18px;
         }
 
-        h2 { font-size: 19px; margin: 0 0 6px; }
+        h2 {
+            font-size: 19px;
+            margin: 0 0 6px;
+        }
+
         .content-grid {
             display: grid;
             grid-template-columns: minmax(0, 1.5fr) minmax(220px, 1fr);
@@ -104,14 +139,23 @@
             align-items: start;
         }
 
-        table { width: 100%; border-collapse: collapse; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
         th, td {
             text-align: left;
             padding: 14px 10px;
             border-bottom: 1px solid #eeeef5;
             font-size: 13px;
         }
-        th { color: #85869e; font-weight: normal; }
+
+        th {
+            color: #85869e;
+            font-weight: normal;
+        }
+
         .tag {
             display: inline-block;
             padding: 6px 10px;
@@ -141,7 +185,10 @@
             font-weight: bold;
         }
 
-        button:hover { background: #5948c4; }
+        button:hover {
+            background: #5948c4;
+        }
+
         .success {
             padding: 14px;
             background: #e5f8ec;
@@ -149,6 +196,7 @@
             border-radius: 9px;
             margin-top: 22px;
         }
+
         .errors {
             background: #fff0f0;
             color: #b42318;
@@ -156,23 +204,110 @@
             padding: 12px 28px;
             margin-top: 16px;
         }
-        .empty { color: #9293a6; padding: 20px 0; font-size: 14px; }
+
+        .empty {
+            color: #9293a6;
+            padding: 20px 0;
+            font-size: 14px;
+        }
+
+        /* Tombol Edit dan Delete */
+        .actions {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .actions button {
+            width: auto;
+            padding: 7px 10px;
+            font-size: 12px;
+        }
+
+        .btn-edit {
+            background: #7160dc;
+        }
+
+        .btn-delete {
+            background: #dc5555;
+        }
+
+        .btn-delete:hover {
+            background: #bd3737;
+        }
+
+        .edit-form {
+            display: none;
+            min-width: 150px;
+        }
+
+        .edit-form input {
+            margin: 0 0 8px;
+            padding: 8px;
+        }
+
+        .btn-save {
+            background: #26965a;
+        }
+
+        .btn-cancel {
+            background: #85869e;
+        }
+
+        .edit-form .actions {
+            display: flex;
+        }
+
+        .edit-form .actions button {
+            flex: 1;
+        }
 
         @media (max-width: 850px) {
-            .sidebar { position: static; width: 100%; height: auto; }
-            .menu { margin-top: 20px; display: flex; gap: 8px; }
-            .menu a { margin: 0; }
-            main { margin-left: 0; padding: 20px; }
-            .content-grid { grid-template-columns: 1fr; }
+            .sidebar {
+                position: static;
+                width: 100%;
+                height: auto;
+            }
+
+            .menu {
+                margin-top: 20px;
+                display: flex;
+                gap: 8px;
+            }
+
+            .menu a {
+                margin: 0;
+            }
+
+            main {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 500px) {
-            .cards { grid-template-columns: 1fr; }
-            .top { align-items: flex-start; gap: 12px; flex-direction: column; }
-            .panel { padding: 16px; overflow-x: auto; }
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .top {
+                align-items: flex-start;
+                gap: 12px;
+                flex-direction: column;
+            }
+
+            .panel {
+                padding: 16px;
+                overflow-x: auto;
+            }
         }
     </style>
 </head>
+
 <body>
 
 <aside class="sidebar">
@@ -180,19 +315,21 @@
     <p>MANAGEMENT SYSTEM</p>
 
     <nav class="menu">
-        <a href="{{ route('admin') }}">▦ &nbsp; Dashboard</a>
-        <a href="#genres">▤ &nbsp; Genre</a>
-        <a href="#authors">♙ &nbsp; Author</a>
+        <a href="{{ route('admin') }}">Dashboard</a>
+        <a href="#genres">Genre</a>
+        <a href="#authors">Author</a>
     </nav>
 </aside>
 
 <main>
+
     <div class="top">
         <div>
             <h1>Dashboard</h1>
             <p class="muted">Selamat datang di panel administrasi BookSales.</p>
         </div>
-        <div class="profile">Admin &nbsp; ●</div>
+
+        <div class="profile">Admin</div>
     </div>
 
     @if (session('success'))
@@ -212,40 +349,117 @@
 
     <div class="cards">
         <div class="card">
-            <div class="icon">▤ &nbsp; Total Genre</div>
+            <div class="icon">Total Genre</div>
             <div class="number">{{ $genres->count() }}</div>
             <p class="muted">Genre tersimpan di database</p>
         </div>
+
         <div class="card">
-            <div class="icon">♙ &nbsp; Total Author</div>
+            <div class="icon">Total Author</div>
             <div class="number">{{ $authors->count() }}</div>
             <p class="muted">Author tersimpan di database</p>
         </div>
     </div>
 
+    <!-- GENRE -->
     <section id="genres" class="content-grid">
+
         <div class="panel">
             <div class="section-title">
                 <div>
                     <h2>Daftar Genre</h2>
                     <span class="muted">Data genre buku</span>
                 </div>
+
                 <span class="tag">{{ $genres->count() }} data</span>
             </div>
 
             <table>
                 <thead>
-                    <tr><th>ID</th><th>Nama Genre</th><th>Status</th></tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nama Genre</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
+                    </tr>
                 </thead>
+
                 <tbody>
                     @forelse ($genres as $genre)
                         <tr>
                             <td>{{ $genre->id }}</td>
-                            <td>{{ $genre->name }}</td>
-                            <td><span class="tag">Aktif</span></td>
+
+                            <td>
+                                <span class="name-display">
+                                    {{ $genre->name }}
+                                </span>
+
+                                <form
+                                    class="edit-form"
+                                    action="{{ route('admin.genres.update', $genre->id) }}"
+                                    method="POST"
+                                >
+                                    @csrf
+                                    @method('PUT')
+
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        value="{{ $genre->name }}"
+                                        required
+                                    >
+
+                                    <div class="actions">
+                                        <button type="submit" class="btn-save">
+                                            Simpan
+                                        </button>
+
+                                        <button
+                                            type="button"
+                                            class="btn-cancel"
+                                            onclick="cancelEdit(this)"
+                                        >
+                                            Batal
+                                        </button>
+                                    </div>
+                                </form>
+                            </td>
+
+                            <td>
+                                <span class="tag">Aktif</span>
+                            </td>
+
+                            <td>
+                                <div class="actions">
+                                    <button
+                                        type="button"
+                                        class="btn-edit"
+                                        onclick="editRow(this)"
+                                    >
+                                        Edit
+                                    </button>
+
+                                    <form
+                                        action="{{ route('admin.genres.destroy', $genre->id) }}"
+                                        method="POST"
+                                        onsubmit="return confirm('Yakin ingin menghapus genre ini?')"
+                                    >
+                                        @csrf
+                                        @method('DELETE')
+
+                                        <button type="submit" class="btn-delete">
+                                            Delete
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
                         </tr>
                     @empty
-                        <tr><td colspan="3" class="empty">Belum ada data genre.</td></tr>
+                        <tr>
+                            <td colspan="4" class="empty">
+                                Belum ada data genre.
+                            </td>
+                        </tr>
                     @endforelse
                 </tbody>
             </table>
@@ -257,37 +471,123 @@
 
             <form action="{{ route('admin.genres.store') }}" method="POST">
                 @csrf
+
                 <label for="genre-name">Nama Genre</label>
-                <input id="genre-name" type="text" name="name"
-                    value="{{ old('name') }}" placeholder="Contoh: Fantasy" required>
+
+                <input
+                    id="genre-name"
+                    type="text"
+                    name="name"
+                    value="{{ old('name') }}"
+                    placeholder="Contoh: Fantasy"
+                    required
+                >
+
                 <button type="submit">+ Tambah Genre</button>
             </form>
         </div>
+
     </section>
 
+    <!-- AUTHOR -->
     <section id="authors" class="content-grid">
+
         <div class="panel">
             <div class="section-title">
                 <div>
                     <h2>Daftar Author</h2>
                     <span class="muted">Data penulis buku</span>
                 </div>
+
                 <span class="tag">{{ $authors->count() }} data</span>
             </div>
 
             <table>
                 <thead>
-                    <tr><th>ID</th><th>Nama Author</th><th>Status</th></tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nama Author</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
+                    </tr>
                 </thead>
+
                 <tbody>
                     @forelse ($authors as $author)
                         <tr>
                             <td>{{ $author->id }}</td>
-                            <td>{{ $author->name }}</td>
-                            <td><span class="tag">Aktif</span></td>
+
+                            <td>
+                                <span class="name-display">
+                                    {{ $author->name }}
+                                </span>
+
+                                <form
+                                    class="edit-form"
+                                    action="{{ route('admin.authors.update', $author->id) }}"
+                                    method="POST"
+                                >
+                                    @csrf
+                                    @method('PUT')
+
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        value="{{ $author->name }}"
+                                        required
+                                    >
+
+                                    <div class="actions">
+                                        <button type="submit" class="btn-save">
+                                            Simpan
+                                        </button>
+
+                                        <button
+                                            type="button"
+                                            class="btn-cancel"
+                                            onclick="cancelEdit(this)"
+                                        >
+                                            Batal
+                                        </button>
+                                    </div>
+                                </form>
+                            </td>
+
+                            <td>
+                                <span class="tag">Aktif</span>
+                            </td>
+
+                            <td>
+                                <div class="actions">
+                                    <button
+                                        type="button"
+                                        class="btn-edit"
+                                        onclick="editRow(this)"
+                                    >
+                                        Edit
+                                    </button>
+
+                                    <form
+                                        action="{{ route('admin.authors.destroy', $author->id) }}"
+                                        method="POST"
+                                        onsubmit="return confirm('Yakin ingin menghapus author ini?')"
+                                    >
+                                        @csrf
+                                        @method('DELETE')
+
+                                        <button type="submit" class="btn-delete">
+                                            Delete
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
                         </tr>
                     @empty
-                        <tr><td colspan="3" class="empty">Belum ada data author.</td></tr>
+                        <tr>
+                            <td colspan="4" class="empty">
+                                Belum ada data author.
+                            </td>
+                        </tr>
                     @endforelse
                 </tbody>
             </table>
@@ -299,16 +599,28 @@
 
             <form action="{{ route('admin.authors.store') }}" method="POST">
                 @csrf
+
                 <label for="author-name">Nama Author</label>
-                <input id="author-name" type="text" name="name"
-                    value="{{ old('name') }}" placeholder="Contoh: Andrea Hirata" required>
+
+                <input
+                    id="author-name"
+                    type="text"
+                    name="name"
+                    value="{{ old('name') }}"
+                    placeholder="Contoh: Andrea Hirata"
+                    required
+                >
+
                 <button type="submit">+ Tambah Author</button>
             </form>
         </div>
+
     </section>
+
 </main>
 
 <script>
+    // Mengaktifkan menu sidebar
     const menuLinks = document.querySelectorAll('.menu a');
 
     function updateActiveMenu() {
@@ -325,8 +637,7 @@
             const href = link.getAttribute('href');
 
             const isActive =
-                (activeMenu === 'dashboard' &&
-                    !href.startsWith('#')) ||
+                (activeMenu === 'dashboard' && !href.startsWith('#')) ||
                 href === '#' + activeMenu;
 
             link.classList.toggle('active', isActive);
@@ -338,9 +649,9 @@
             const href = this.getAttribute('href');
 
             if (href.startsWith('#')) {
-                menuLinks.forEach(item =>
-                    item.classList.remove('active')
-                );
+                menuLinks.forEach(item => {
+                    item.classList.remove('active');
+                });
 
                 this.classList.add('active');
             }
@@ -349,6 +660,28 @@
 
     window.addEventListener('hashchange', updateActiveMenu);
     updateActiveMenu();
+
+
+    // Menampilkan form edit
+    function editRow(button) {
+        const row = button.closest('tr');
+
+        row.querySelector('.name-display').style.display = 'none';
+        row.querySelector('.edit-form').style.display = 'block';
+
+        button.style.display = 'none';
+    }
+
+    // Membatalkan edit
+    function cancelEdit(button) {
+        const row = button.closest('tr');
+
+        row.querySelector('.name-display').style.display = 'inline';
+        row.querySelector('.edit-form').style.display = 'none';
+
+        row.querySelector('.btn-edit').style.display = 'inline-block';
+    }
 </script>
+
 </body>
 </html>
